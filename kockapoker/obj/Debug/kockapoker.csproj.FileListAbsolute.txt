@@ -1,0 +1,10 @@
+D:\kockapokergit\kockapoker\bin\Debug\kockapoker.exe.config
+D:\kockapokergit\kockapoker\bin\Debug\kockapoker.exe
+D:\kockapokergit\kockapoker\bin\Debug\kockapoker.pdb
+D:\kockapokergit\kockapoker\obj\Debug\kockapoker.csprojAssemblyReference.cache
+D:\kockapokergit\kockapoker\obj\Debug\kockapoker.Form1.resources
+D:\kockapokergit\kockapoker\obj\Debug\kockapoker.Properties.Resources.resources
+D:\kockapokergit\kockapoker\obj\Debug\kockapoker.csproj.GenerateResource.cache
+D:\kockapokergit\kockapoker\obj\Debug\kockapoker.csproj.CoreCompileInputs.cache
+D:\kockapokergit\kockapoker\obj\Debug\kockapoker.exe
+D:\kockapokergit\kockapoker\obj\Debug\kockapoker.pdb
