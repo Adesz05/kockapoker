@@ -29,7 +29,28 @@ namespace kockapoker
         /// </summary>
         private void InitializeComponent()
         {
+            this.RollDiceBtn = new System.Windows.Forms.Button();
+            this.TablePanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
+            // 
+            // RollDiceBtn
+            // 
+            this.RollDiceBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.RollDiceBtn.Location = new System.Drawing.Point(201, 292);
+            this.RollDiceBtn.Name = "RollDiceBtn";
+            this.RollDiceBtn.Size = new System.Drawing.Size(153, 64);
+            this.RollDiceBtn.TabIndex = 0;
+            this.RollDiceBtn.Text = "Roll Dice";
+            this.RollDiceBtn.UseVisualStyleBackColor = true;
+            this.RollDiceBtn.Click += new System.EventHandler(this.RollDiceBtn_Click);
+            // 
+            // TablePanel
+            // 
+            this.TablePanel.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.TablePanel.Location = new System.Drawing.Point(548, 25);
+            this.TablePanel.Name = "TablePanel";
+            this.TablePanel.Size = new System.Drawing.Size(240, 340);
+            this.TablePanel.TabIndex = 1;
             // 
             // Form1
             // 
@@ -37,6 +58,8 @@ namespace kockapoker
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.ForestGreen;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.TablePanel);
+            this.Controls.Add(this.RollDiceBtn);
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -45,6 +68,9 @@ namespace kockapoker
         }
 
         #endregion
+
+        private System.Windows.Forms.Button RollDiceBtn;
+        private System.Windows.Forms.Panel TablePanel;
     }
 }
 
