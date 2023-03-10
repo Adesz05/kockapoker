@@ -105,5 +105,8 @@
   <ItemGroup>
     <None Include="bin\Debug\6.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\locked.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

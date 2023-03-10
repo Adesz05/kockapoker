@@ -13,17 +13,27 @@ namespace kockapoker
     {
         public int Value
         {
-            get
-            { return _value; }
+            get { return _value; }
             set
             {
                 _value = value;
-                Image = SetImage(value);
+                BackgroundImage = SetImage(value);
             }
         }
-        public bool Locked = false;
+        public bool Locked
+        {
+            get { return locked; }
+            set
+            {
+                locked = value;
+                Image = value ? Properties.Resources.locked : null;
+            }
+        }
+
         private Random r = new Random();
+        private bool locked = false; 
         private int _value;
+
 
 
         private Image SetImage(int value)

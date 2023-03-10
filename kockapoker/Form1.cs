@@ -44,7 +44,8 @@ namespace kockapoker
                     Location = new Point(50+50*i, 50),
                     Size=new Size(50,50),
                     SizeMode=PictureBoxSizeMode.Zoom,
-                });
+                    BackgroundImageLayout = ImageLayout.Zoom
+            });
                 Dices[i].Click += new EventHandler(Dice_Click);
                 this.Controls.Add(Dices[i]);
             }
