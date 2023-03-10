@@ -13,11 +13,18 @@ namespace kockapoker
     public partial class Form1 : Form
     {
         static List<Dice> Dices = new List<Dice>();
-        public Form1()
+        static List<Player> Players = new List<Player>();
+        public Form1(int playercount)
         {
             InitializeComponent();
             DiceGen();
+            PlayerGen(playercount);
             RowGen();
+        }
+
+        private void PlayerGen(int playercount)
+        {
+            
         }
 
         private void RowGen()

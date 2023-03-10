@@ -18,3 +18,4 @@ D:\BG\KockaPoker\kockapoker\obj\Debug\kockapoker.csproj.GenerateResource.cache
 D:\BG\KockaPoker\kockapoker\obj\Debug\kockapoker.csproj.CoreCompileInputs.cache
 D:\BG\KockaPoker\kockapoker\obj\Debug\kockapoker.exe
 D:\BG\KockaPoker\kockapoker\obj\Debug\kockapoker.pdb
+D:\kockapokergit\kockapoker\obj\Debug\kockapoker.Menu.resources
