@@ -18,18 +18,23 @@ namespace kockapoker
         {
             InitializeComponent();
             DiceGen();
-            PlayerGen(playercount);
+            PlayerGen(playercount, FileIO.Read("funnynames.txt"));
             RowGen();
         }
 
-        private void PlayerGen(int playercount)
+        private void PlayerGen(int playercount, List<string> funnynames)
         {
-            
+            for (int i = 0; i < playercount; i++)
+            {
+                Players.Add(new Player(funnynames[new Random().Next(0, funnynames.Count)]));
+                funnynames.Remove(Players[i].Name);
+            }
+
         }
 
         private void RowGen()
         {
-            List<string> values = new List<string>() {"", "1", "2", "3", "4", "5", "6", "1 pár", "2 pár", "drill", "póker", "fullhouse", "kis sor", "nagy sor", "yahtzee", "esély", "összesen:" };
+            List<string> values = new List<string>() {"1", "2", "3", "4", "5", "6", "1 pár", "2 pár", "drill", "póker", "fullhouse", "kis sor", "nagy sor", "yahtzee", "esély", "összesen:" };
             for (int i = 0; i < values.Count; i++)
             {
                 Panel row = new Panel() {
@@ -39,6 +44,19 @@ namespace kockapoker
                     BorderStyle = BorderStyle.FixedSingle,
                 };
                 TablePanel.Controls.Add(row);
+                ColumnGen(row, i);
+            }
+        }
+
+        private void ColumnGen(Panel row, int j)
+        {
+            for (int i = 0; i < Players.Count; i++)
+            {
+                int temp = Convert.ToInt32($"{i}");
+                Players[temp].Points[j].Size = new Size(TablePanel.Width / Players.Count, TablePanel.Height / Players[temp].Points.Count);
+                Players[temp].Points[j].Location = new Point(temp * Players[temp].Points[j].Size.Width, 0);
+                Players[temp].Points[j].Text = "???";
+                row.Controls.Add(Players[temp].Points[j]);
             }
         }
 
@@ -72,6 +90,9 @@ namespace kockapoker
             }
         }
 
-
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
