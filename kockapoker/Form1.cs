@@ -24,12 +24,27 @@ namespace kockapoker
 
         private void PlayerGen(int playercount, List<string> funnynames)
         {
+            Random r = new Random();
             for (int i = 0; i < playercount; i++)
             {
-                Players.Add(new Player(funnynames[new Random().Next(0, funnynames.Count)]));
+                Players.Add(new Player(funnynames[r.Next(0, funnynames.Count)]));
                 funnynames.Remove(Players[i].Name);
-            }
+                LabelGen(Players[i], i, playercount);
 
+            }
+            Players[0].Active = true;
+        }
+
+        private void LabelGen(Player player, int i, int playercount)
+        {
+            TablePanel.Controls.Add(new Label()
+            {
+                Size = new Size(TablePanel.Width / (playercount + 1), TablePanel.Height / (player.Points.Count + 1)),
+                Location = new Point((i + 1) * (TablePanel.Size.Width / (playercount + 1)), 0),
+                Text = player.Name,
+                TextAlign = ContentAlignment.MiddleCenter,
+                BorderStyle = BorderStyle.FixedSingle
+            });
         }
 
         private void RowGen()
@@ -40,7 +55,7 @@ namespace kockapoker
                 Panel row = new Panel() {
 
                     Size = new Size(TablePanel.Width, TablePanel.Height/values.Count),
-                    Location = new Point(0, i * TablePanel.Height / values.Count),
+                    Location = new Point(0, (i + 1) * TablePanel.Height / values.Count),
                     BorderStyle = BorderStyle.FixedSingle,
                 };
                 TablePanel.Controls.Add(row);
@@ -50,13 +65,22 @@ namespace kockapoker
 
         private void ColumnGen(Panel row, int j)
         {
+            row.Controls.Add(new Label()
+            {
+                Location=new Point(0,(TablePanel.Height / (Players[0].Points.Count + 1))*(j+1)),
+                Text=Players[0].Points[j].Type, //nem látja a typeot
+                TextAlign=ContentAlignment.MiddleCenter,
+                BorderStyle=BorderStyle.FixedSingle,
+                AutoSize=false,
+                Size= new Size(TablePanel.Width / (Players.Count + 1), TablePanel.Height / (Players[0].Points.Count + 1))
+
+        });
             for (int i = 0; i < Players.Count; i++)
             {
-                int temp = Convert.ToInt32($"{i}");
-                Players[temp].Points[j].Size = new Size(TablePanel.Width / Players.Count, TablePanel.Height / Players[temp].Points.Count);
-                Players[temp].Points[j].Location = new Point(temp * Players[temp].Points[j].Size.Width, 0);
-                Players[temp].Points[j].Text = "???";
-                row.Controls.Add(Players[temp].Points[j]);
+                Players[i].Points[j].Size = new Size(TablePanel.Width / (Players.Count + 1), TablePanel.Height / (Players[i].Points.Count+1));
+                Players[i].Points[j].Location = new Point((i+1) * Players[i].Points[j].Size.Width, 0);
+                Players[i].Points[j].Text = "???";
+                row.Controls.Add(Players[i].Points[j]);
             }
         }
 

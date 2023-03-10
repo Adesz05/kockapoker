@@ -47,9 +47,9 @@ namespace kockapoker
             // TablePanel
             // 
             this.TablePanel.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.TablePanel.Location = new System.Drawing.Point(548, 25);
+            this.TablePanel.Location = new System.Drawing.Point(368, 44);
             this.TablePanel.Name = "TablePanel";
-            this.TablePanel.Size = new System.Drawing.Size(240, 340);
+            this.TablePanel.Size = new System.Drawing.Size(420, 340);
             this.TablePanel.TabIndex = 1;
             // 
             // Form1

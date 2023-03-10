@@ -18,7 +18,11 @@ namespace kockapoker
                 StreamReader r = new StreamReader(filename);
                 while (!r.EndOfStream)
                 {
-                    datas.Add(r.ReadLine());
+                    string temp = r.ReadLine();
+                    if (!temp.Contains(" "))
+                    {
+                        datas.Add(temp);
+                    }
                 }
                 r.Close();
             }
