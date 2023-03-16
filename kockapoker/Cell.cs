@@ -35,54 +35,121 @@ namespace kockapoker
                 {
                     case "1-es":
 
-                        break;
+                        
                     case "2-es":
 
-                        break;
+                        
                     case "3-as":
 
-                        break;
+                        
                     case "4-es":
 
-                        break;
+                        
                     case "5-ös":
 
-                        break;
+                        
                     case "6-os":
 
-                        break;
+                        
                     case "1 pár":
 
-                        break;
+                        
                     case "2 pár":
 
-                        break;
+                        
                     case "Drill":
 
-                        break;
+                        
                     case "Póker":
 
-                        break;
+                        
                     case "Fullhouse":
-
-                        break;
+                        return Fullhouse(dices);
+                        
                     case "Kis sor":
+                        return SmallRow(dices);
 
-                        break;
                     case "Nagy sor":
-
-                        break;
+                        return BigRow(dices);
+                        
                     case "Yahtzee":
+                        return Yahtzee(dices);
 
-                        break;
                     case "Esély":
-
-                        break;
+                        return Chance(dices);
+                        
                     default:
-                        break;
+                        return 0;
+                        
                 }
             }
-            return 0;
+        }
+
+        private int Fullhouse(List<Dice> dices)
+        {
+            int drill=0;
+            for (int i = 0; i < dices.Count; i++)
+            {
+                drill = dices.Find(x => dices.Count(y => y.Value == x.Value) == 3).Value;
+            }
+            if (drill==0)
+            {
+                return 0;
+            }
+            else
+            {
+                dices.RemoveAll(x => x.Value==drill);
+                return (dices[0].Value == dices[1].Value) ? 25 : 0;
+            }
+
+        }
+
+        private int SmallRow(List<Dice> dices)
+        {
+            dices.RemoveAll(x => dices.Count(y => y.Value == x.Value) >= 2);
+            if (dices.Count<4)
+            {
+                return 0;
+            }
+            return BigRow(dices) != 0 ? 30 : 0;
+        }
+
+        private int BigRow(List<Dice> dices)
+        {
+            dices.OrderBy(x => x. Value);
+            for (int i = 0; i < dices.Count-1; i++)
+            {
+                if (dices[i].Value + 1 != dices[i+1].Value)
+                {
+                    return 0;
+                }
+            }
+            return 40;
+
+                
+                    
+        }
+
+        private int Yahtzee(List<Dice> dices)
+        {
+            return dices.Count(x => x.Value == dices[0].Value) == dices.Count ? 50 : 0;
+            //int szamlalo = 0;
+            //for (int i = 1; i < dices.Count; i++)
+            //{
+            //    if (dices[0].Value==dices[i].Value)
+            //    {
+            //        szamlalo++;
+            //    }
+            //}
+            //if (szamlalo==4)
+            //{
+            //    return 50;
+            //}
+        }
+
+        private int Chance(List<Dice> dices)
+        {
+            return dices.Sum(x => x.Value);
         }
     }
 }
