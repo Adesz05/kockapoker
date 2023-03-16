@@ -52,10 +52,10 @@ namespace kockapoker
 
                         break;
                     case "1 pár":
-
+                        return OnePair(dices);
                         break;
                     case "2 pár":
-
+                        return TwoPair(dices);
                         break;
                     case "Drill":
 
@@ -83,6 +83,30 @@ namespace kockapoker
                 }
             }
             return 0;
+        }
+
+        private int TwoPair(List<Dice> dices)
+        {
+            dices.OrderBy(x => x.Value);
+            List<Dice> pairs = dices.FindAll(x => dices.Count(y => y.Value == x.Value) >= 2);
+            if (pairs.Count >= 4)
+            {
+                return 2 * (pairs[0].Value + pairs.Last().Value);
+            }
+            return 0;
+        }
+
+        private int OnePair(List<Dice> dices)
+        {
+            int max = 0;
+            foreach (Dice item in dices)
+            {
+                if (dices.Count(x => x.Value == item.Value) >= 2 && item.Value*2 > max)
+                {
+                    max = item.Value * 2;
+                }
+            }
+            return max;
         }
     }
 }
