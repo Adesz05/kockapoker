@@ -34,22 +34,22 @@ namespace kockapoker
                 switch (Type)
                 {
                     case "1-es":
-
+                        return Numbers(dices, 1);
                         break;
                     case "2-es":
-
+                        return Numbers(dices, 2);
                         break;
                     case "3-as":
-
+                        return Numbers(dices, 3);
                         break;
                     case "4-es":
-
+                        return Numbers(dices, 4);
                         break;
                     case "5-ös":
-
+                        return Numbers(dices, 5);
                         break;
                     case "6-os":
-
+                        return Numbers(dices, 6);
                         break;
                     case "1 pár":
 
@@ -58,10 +58,10 @@ namespace kockapoker
 
                         break;
                     case "Drill":
-
+                        return ThreeOrFourOfAKind(dices, 3);
                         break;
                     case "Póker":
-
+                        return ThreeOrFourOfAKind(dices, 4);
                         break;
                     case "Fullhouse":
 
@@ -83,6 +83,25 @@ namespace kockapoker
                 }
             }
             return 0;
+        }
+
+        private int ThreeOrFourOfAKind(List<Dice> dices, int v)
+        {
+            for (int i = 1; i < 7; i++)
+            {
+                if (dices.Count(x => x.Value == i) >= v)
+                {
+                    return dices.Sum(x => x.Value = i);
+                }
+            }
+
+            return 0;
+        }
+
+
+        private int Numbers(List<Dice> dices, int number)
+        {
+            return dices.Count(x => x.Value == number) * number; 
         }
     }
 }
