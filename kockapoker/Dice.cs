@@ -50,7 +50,7 @@ namespace kockapoker
             if (!Locked)
             {
                 Value = r.Next(1, 7);
-                Thread.Sleep(1);
+                Thread.Sleep(15);
             }
         }
     }

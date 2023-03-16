@@ -52,7 +52,7 @@ namespace kockapoker
         {
             Name = name;
             Active = false;
-            List<string> values = new List<string>() { "1-es", "2-es", "3-as", "4-es", "5-ös", "6-os", "1 pár", "2 pár", "drill", "póker", "fullhouse", "kis sor", "nagy sor", "yahtzee", "esély", "összesen" };
+            List<string> values = new List<string>() { "1-es", "2-es", "3-as", "4-es", "5-ös", "6-os", "1 pár", "2 pár", "Drill", "Póker", "Fullhouse", "Kis sor", "Nagy sor", "Yahtzee", "Esély" };
             for (int i = 0; i < values.Count; i++)
             {
                 Points.Add(new Cell(values[i]));

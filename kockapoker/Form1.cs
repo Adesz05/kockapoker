@@ -12,7 +12,7 @@ namespace kockapoker
 {
     public partial class Form1 : Form
     {
-        static List<Dice> Dices = new List<Dice>();
+        public static List<Dice> Dices = new List<Dice>();
         static List<Player> Players = new List<Player>();
         public Form1(int playercount)
         {
@@ -49,7 +49,7 @@ namespace kockapoker
 
         private void RowGen()
         {
-            List<string> values = new List<string>() {"1", "2", "3", "4", "5", "6", "1 pár", "2 pár", "drill", "póker", "fullhouse", "kis sor", "nagy sor", "yahtzee", "esély", "összesen:" };
+            List<string> values = new List<string>() {"1", "2", "3", "4", "5", "6", "1 pár", "2 pár", "drill", "póker", "fullhouse", "kis sor", "nagy sor", "yahtzee", "esély" };
             for (int i = 0; i < values.Count; i++)
             {
                 Panel row = new Panel() {
@@ -67,13 +67,12 @@ namespace kockapoker
         {
             row.Controls.Add(new Label()
             {
-                Location=new Point(0,(TablePanel.Height / (Players[0].Points.Count + 1))*(j+1)),
+                Location=new Point(0,0),
                 Text=Players[0].Points[j].Type, //nem látja a typeot
                 TextAlign=ContentAlignment.MiddleCenter,
                 BorderStyle=BorderStyle.FixedSingle,
                 AutoSize=false,
                 Size= new Size(TablePanel.Width / (Players.Count + 1), TablePanel.Height / (Players[0].Points.Count + 1))
-
         });
             for (int i = 0; i < Players.Count; i++)
             {
@@ -98,7 +97,9 @@ namespace kockapoker
                 Dices[i].Click += new EventHandler(Dice_Click);
                 this.Controls.Add(Dices[i]);
             }
+            
         }
+        //public static List<Dice> 
 
         private void Dice_Click(object sender, EventArgs e)
         {
