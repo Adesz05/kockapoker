@@ -76,7 +76,7 @@ namespace kockapoker
                         return Yahtzee(dices);
 
                     case "Esély":
-                        return Chance(dices);
+                        //return Chance(dices);
                         
                     default:
                         return 0;
@@ -146,17 +146,16 @@ namespace kockapoker
             //    return 50;
             //}
         }
-
-        private int Chance(List<Dice> dices)
-        {
-            return dices.Sum(x => x.Value);
-        }
-    }
-                        break;
-                }
-            }
-            return 0;
-        }
+    //    private int Chance(List<Dice> dices)
+    //    {
+    //        return dices.Sum(x => x.Value);
+    //    }
+    //}
+    //                    break;
+    //            }
+    //        }
+    //        return 0;
+    //    }
 
         private int TwoPair(List<Dice> dices)
         {
