@@ -64,7 +64,7 @@ namespace kockapoker
                         return ThreeOrFourOfAKind(dices, 4);
                         
                     case "Fullhouse":
-                        return Fullhouse(dices);
+                        //return Fullhouse(dices);
                         
                     case "Kis sor":
                         return SmallRow(dices);
@@ -87,10 +87,16 @@ namespace kockapoker
 
         private int Fullhouse(List<Dice> dices)
         {
+            List<Dice> dicescopy = CopyDices(dices);
             int drill=0;
-            for (int i = 0; i < dices.Count; i++)
+            for (int i = 0; i < dicescopy.Count; i++)
             {
-                drill = dices.Find(x => dices.Count(y => y.Value == x.Value) == 3).Value;
+                int temp = dicescopy.Find(x => dicescopy.Count(y => y.Value == x.Value) == 3).Value;
+                if (temp!=0)
+                {
+                    drill = temp;
+                    break;
+                }
             }
             if (drill==0)
             {
@@ -98,20 +104,31 @@ namespace kockapoker
             }
             else
             {
-                dices.RemoveAll(x => x.Value==drill);
-                return (dices[0].Value == dices[1].Value) ? 25 : 0;
+                dicescopy.RemoveAll(x => x.Value==drill);
+                return (dicescopy[0].Value == dicescopy[1].Value) ? 25 : 0;
             }
 
         }
 
+        private List<Dice> CopyDices(List<Dice> dices)
+        {
+            List<Dice> copy = new List<Dice>();
+            for (int i = 0; i < dices.Count; i++)
+            {
+                copy.Add(dices[i]);
+            }
+            return copy;
+        }
+
         private int SmallRow(List<Dice> dices)
         {
-            dices.RemoveAll(x => dices.Count(y => y.Value == x.Value) >= 2);
+            List<Dice> dicescopy = CopyDices(dices);
+            dicescopy.RemoveAll(x => dicescopy.Count(y => y.Value == x.Value) >= 2);
             if (dices.Count<4)
             {
                 return 0;
             }
-            return BigRow(dices) != 0 ? 30 : 0;
+            return BigRow(dicescopy) != 0 ? 30 : 0;
         }
 
         private int BigRow(List<Dice> dices)
@@ -178,7 +195,17 @@ namespace kockapoker
 
         private int Numbers(List<Dice> dices, int number)
         {
+            //if (number==2)
+            //{
+            //    string text = "";
+            //    for (int i = 0; i < dices.Count; i++)
+            //    {
+            //        text += $"{dices[i].Value} - ";
+            //    }
+            //    MessageBox.Show(text);
+            //}
             return dices.Count(x => x.Value == number) * number; 
+            
         }
     }
 }

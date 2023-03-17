@@ -94,6 +94,7 @@ namespace kockapoker
                     SizeMode=PictureBoxSizeMode.Zoom,
                     BackgroundImageLayout = ImageLayout.Zoom
             });
+                Dices[i].Randomize();
                 Dices[i].Click += new EventHandler(Dice_Click);
                 this.Controls.Add(Dices[i]);
             }
@@ -112,6 +113,16 @@ namespace kockapoker
             for (int i = 0; i < Dices.Count; i++)
             {
                 Dices[i].Randomize();
+            }
+            
+            CalculateResults(Players.Find(x => x.Active));
+        }
+
+        private void CalculateResults(Player player)
+        {
+            foreach (Cell cell in player.Points)
+            {
+                cell.Text = cell.Calculate(Dices).ToString();
             }
         }
 

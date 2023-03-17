@@ -43,7 +43,7 @@ namespace kockapoker
 
         public Dice()
         {
-            Randomize();
+
         }
         public void Randomize()
         {
