@@ -35,34 +35,34 @@ namespace kockapoker
                 {
                     case "1-es":
                         return Numbers(dices, 1);
-                        break;
+                        
                     case "2-es":
                         return Numbers(dices, 2);
-                        break;
+                        
                     case "3-as":
                         return Numbers(dices, 3);
-                        break;
+                        
                     case "4-es":
                         return Numbers(dices, 4);
-                        break;
+                        
                     case "5-ös":
                         return Numbers(dices, 5);
-                        break;
+                        
                     case "6-os":
                         return Numbers(dices, 6);
-                        break;
+                        
                     case "1 pár":
                         return OnePair(dices);
-                        break;
+                        
                     case "2 pár":
                         return TwoPair(dices);
-                        break;
+                        
                     case "Drill":
                         return ThreeOrFourOfAKind(dices, 3);
-                        break;
+                        
                     case "Póker":
                         return ThreeOrFourOfAKind(dices, 4);
-                        break;
+                        
                     case "Fullhouse":
                         return Fullhouse(dices);
                         
@@ -76,7 +76,7 @@ namespace kockapoker
                         return Yahtzee(dices);
 
                     case "Esély":
-                        //return Chance(dices);
+                        return Chance(dices);
                         
                     default:
                         return 0;
@@ -133,30 +133,11 @@ namespace kockapoker
         private int Yahtzee(List<Dice> dices)
         {
             return dices.Count(x => x.Value == dices[0].Value) == dices.Count ? 50 : 0;
-            //int szamlalo = 0;
-            //for (int i = 1; i < dices.Count; i++)
-            //{
-            //    if (dices[0].Value==dices[i].Value)
-            //    {
-            //        szamlalo++;
-            //    }
-            //}
-            //if (szamlalo==4)
-            //{
-            //    return 50;
-            //}
         }
-    //    private int Chance(List<Dice> dices)
-    //    {
-    //        return dices.Sum(x => x.Value);
-    //    }
-    //}
-    //                    break;
-    //            }
-    //        }
-    //        return 0;
-    //    }
-
+        private int Chance(List<Dice> dices)
+        {
+            return dices.Sum(x => x.Value);
+        }
         private int TwoPair(List<Dice> dices)
         {
             dices.OrderBy(x => x.Value);
