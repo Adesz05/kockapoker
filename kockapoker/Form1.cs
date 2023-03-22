@@ -54,8 +54,8 @@ namespace kockapoker
             {
                 Panel row = new Panel() {
 
-                    Size = new Size(TablePanel.Width, TablePanel.Height/values.Count),
-                    Location = new Point(0, (i + 1) * TablePanel.Height / values.Count),
+                    Size = new Size(TablePanel.Width, TablePanel.Height/(values.Count+1)),
+                    Location = new Point(0, (i + 1) * TablePanel.Height / (values.Count+1)),
                     BorderStyle = BorderStyle.FixedSingle,
                 };
                 TablePanel.Controls.Add(row);
@@ -130,5 +130,6 @@ namespace kockapoker
         {
             Application.Exit();
         }
+
     }
 }

@@ -19,10 +19,19 @@ namespace kockapoker
             Type = type;
             AutoSize = false;
             Confirmed = false;
+            ForeColor = Color.Red;
             TextAlign = ContentAlignment.MiddleCenter;
             Font = new Font("Microsoft Sans Serif", 8, FontStyle.Bold);
             BorderStyle = BorderStyle.FixedSingle;
+            this.Click += delegate (object sender, EventArgs e) { Confirm(); };
         }
+
+        private void Confirm()
+        {
+            Confirmed = true;
+            ForeColor = Color.Black;
+        }
+
         public int Calculate(List<Dice> dices)
         {
             if (Confirmed)
@@ -64,7 +73,7 @@ namespace kockapoker
                         return ThreeOrFourOfAKind(dices, 4);
                         
                     case "Fullhouse":
-                        //return Fullhouse(dices);
+                        return Fullhouse(dices);
                         
                     case "Kis sor":
                         return SmallRow(dices);
@@ -88,26 +97,20 @@ namespace kockapoker
         private int Fullhouse(List<Dice> dices)
         {
             List<Dice> dicescopy = CopyDices(dices);
-            int drill=0;
-            for (int i = 0; i < dicescopy.Count; i++)
+            for (int i = 0; i < dices.Count-2; i++)
             {
-                int temp = dicescopy.Find(x => dicescopy.Count(y => y.Value == x.Value) == 3).Value;
-                if (temp!=0)
+                if (dices.Count(x => x.Value == dices[i].Value) >= 3)
                 {
-                    drill = temp;
-                    break;
+                    dicescopy.RemoveAll(x => x.Value == dices[i].Value);
+                    DiceLog(dicescopy);//itt még vannak bajok
+                    if (dicescopy[0].Value == dicescopy[1].Value)
+                    {
+                        return 25;
+                    }
+                    return Yahtzee(dices) == 50 ? 25 : 0;
                 }
             }
-            if (drill==0)
-            {
-                return 0;
-            }
-            else
-            {
-                dicescopy.RemoveAll(x => x.Value==drill);
-                return (dicescopy[0].Value == dicescopy[1].Value) ? 25 : 0;
-            }
-
+            return 0;
         }
 
         private List<Dice> CopyDices(List<Dice> dices)
@@ -123,17 +126,43 @@ namespace kockapoker
         private int SmallRow(List<Dice> dices)
         {
             List<Dice> dicescopy = CopyDices(dices);
-            dicescopy.RemoveAll(x => dicescopy.Count(y => y.Value == x.Value) >= 2);
-            if (dices.Count<4)
+            dicescopy = dicescopy.OrderBy(x => x.Value).ToList();
+            dicescopy = RemoveDuplicates(dicescopy);
+            for (int i = 0; i < dicescopy.Count-1; i++)
             {
-                return 0;
+                if (dicescopy[i].Value + 1 == dicescopy[i + 1].Value)
+                {
+                    if (i == dicescopy.Count-2)
+                    {
+                        return 30;
+                    }
+                }
+                else if (i != 0)
+                {
+                    return 0;
+                }
             }
-            return BigRow(dicescopy) != 0 ? 30 : 0;
+            return 0;
+
+        }
+
+        private List<Dice> RemoveDuplicates(List<Dice> dicescopy)
+        {
+            for (int i = 0; i < dicescopy.Count - 1; i++)
+            {
+                if (dicescopy[i].Value == dicescopy[i + 1].Value)
+                {
+                    dicescopy.Remove(dicescopy[i]);
+                    break;
+                }
+            }
+            return dicescopy;
         }
 
         private int BigRow(List<Dice> dices)
         {
-            dices.OrderBy(x => x. Value);
+            dices = dices.OrderBy(x => x.Value).ToList();
+
             for (int i = 0; i < dices.Count-1; i++)
             {
                 if (dices[i].Value + 1 != dices[i+1].Value)
@@ -157,13 +186,23 @@ namespace kockapoker
         }
         private int TwoPair(List<Dice> dices)
         {
-            dices.OrderBy(x => x.Value);
+            dices=dices.OrderBy(x => x.Value).ToList();
             List<Dice> pairs = dices.FindAll(x => dices.Count(y => y.Value == x.Value) >= 2);
             if (pairs.Count >= 4)
             {
                 return 2 * (pairs[0].Value + pairs.Last().Value);
             }
             return 0;
+        }
+
+        private void DiceLog(List<Dice> dices)
+        {
+            string str = "";
+            for (int i = 0; i < dices.Count; i++)
+            {
+                str += dices[i].Value.ToString() + " ";
+            }
+            MessageBox.Show(str);
         }
 
         private int OnePair(List<Dice> dices)
@@ -185,25 +224,15 @@ namespace kockapoker
             {
                 if (dices.Count(x => x.Value == i) >= v)
                 {
-                    return dices.Sum(x => x.Value = i);
+                    return dices.FindAll(y => y.Value == i).Sum(x => x.Value);
                 }
             }
-
             return 0;
         }
 
 
         private int Numbers(List<Dice> dices, int number)
         {
-            //if (number==2)
-            //{
-            //    string text = "";
-            //    for (int i = 0; i < dices.Count; i++)
-            //    {
-            //        text += $"{dices[i].Value} - ";
-            //    }
-            //    MessageBox.Show(text);
-            //}
             return dices.Count(x => x.Value == number) * number; 
             
         }
