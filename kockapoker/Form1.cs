@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace kockapoker
@@ -14,12 +10,101 @@ namespace kockapoker
     {
         public static List<Dice> Dices = new List<Dice>();
         static List<Player> Players = new List<Player>();
+        public static int RollCount = 0;
         public Form1(int playercount)
         {
             InitializeComponent();
             DiceGen();
             PlayerGen(playercount, FileIO.Read("funnynames.txt"));
             RowGen();
+        }
+
+        public static void NextPlayer()
+        {
+            EndGameCheck();
+            for (int i = 0; i < Players.Count; i++)
+            {
+                ClearColumn(Players[i]);
+                if (Players[i].Active)
+                {
+                    Players[i].Active = false;
+                    Players[i == Players.Count - 1 ? 0 : i + 1].Active = true;
+                    RollCount = 0;
+                    break;
+                }
+            }
+            ClearDices();
+        }
+
+        private static void EndGameCheck()
+        {
+            if (Players.Count(x => HasEmpty(x.Points)) == 0)
+            {
+                WinMessage();
+            }
+        }
+
+        private static void WinMessage()
+        {
+
+            if (DialogResult.Yes == MessageBox.Show(FinalMessage(), "Játék vége", MessageBoxButtons.YesNo))
+            {
+                Application.Restart();
+            }
+            else
+            {
+                Application.Exit();
+            }
+        }
+
+        private static string FinalMessage()
+        {
+            string text = "A győztes";
+            List<Player> winner_s = Players.FindAll(z => z.Points.Sum(n => n.Value) == Players.Max(x => x.Points.Sum(y => y.Value))).ToList();
+            if (winner_s.Count == 1)
+            {
+                text += $" {winner_s[0].Name}\nSzeretnétek új játékot kezdeni?";
+            }
+            else
+            {
+                foreach (Player player in winner_s)
+                {
+                    text += $"\n{player.Name}";
+                }
+                text += "\nSzeretnétek új játékot kezdeni?";
+            }
+            return text;
+        }
+
+        private static bool HasEmpty(List<Cell> points)
+        {
+            foreach (Cell point in points)
+            {
+                if (!point.Confirmed)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static void ClearDices()
+        {
+            for (int i = 0; i < Dices.Count; i++)
+            {
+                Dices[i].Locked = false;
+            }
+        }
+
+        private static void ClearColumn(Player player)
+        {
+            for (int i = 0; i < player.Points.Count; i++)
+            {
+                if (!player.Points[i].Confirmed)
+                {
+                    player.Points[i].Text = "";
+                }
+            }
         }
 
         private void PlayerGen(int playercount, List<string> funnynames)
@@ -29,7 +114,7 @@ namespace kockapoker
             {
                 Players.Add(new Player(funnynames[r.Next(0, funnynames.Count)]));
                 funnynames.Remove(Players[i].Name);
-                LabelGen(Players[i], i, playercount);
+                LabelGen(Players[i], i, playercount);   
 
             }
             Players[0].Active = true;
@@ -65,22 +150,26 @@ namespace kockapoker
 
         private void ColumnGen(Panel row, int j)
         {
-            row.Controls.Add(new Label()
-            {
-                Location=new Point(0,0),
-                Text=Players[0].Points[j].Type, //nem látja a typeot
-                TextAlign=ContentAlignment.MiddleCenter,
-                BorderStyle=BorderStyle.FixedSingle,
-                AutoSize=false,
-                Size= new Size(TablePanel.Width / (Players.Count + 1), TablePanel.Height / (Players[0].Points.Count + 1))
-        });
+            LabelColumnGen(row, j);
             for (int i = 0; i < Players.Count; i++)
             {
                 Players[i].Points[j].Size = new Size(TablePanel.Width / (Players.Count + 1), TablePanel.Height / (Players[i].Points.Count+1));
                 Players[i].Points[j].Location = new Point((i+1) * Players[i].Points[j].Size.Width, 0);
-                Players[i].Points[j].Text = "???";
                 row.Controls.Add(Players[i].Points[j]);
             }
+        }
+
+        private void LabelColumnGen(Panel row, int j)
+        {
+            row.Controls.Add(new Label()
+            {
+                Location = new Point(0, 0),
+                Text = Players[0].Points[j].Type,
+                TextAlign = ContentAlignment.MiddleCenter,
+                BorderStyle = BorderStyle.FixedSingle,
+                AutoSize = false,
+                Size = new Size(TablePanel.Width / (Players.Count + 1), TablePanel.Height / (Players[0].Points.Count + 1))
+            });
         }
 
         private void DiceGen()
@@ -100,7 +189,6 @@ namespace kockapoker
             }
             
         }
-        //public static List<Dice> 
 
         private void Dice_Click(object sender, EventArgs e)
         {
@@ -110,19 +198,25 @@ namespace kockapoker
 
         private void RollDiceBtn_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < Dices.Count; i++)
+            if (RollCount != 3)
             {
-                Dices[i].Randomize();
+                for (int i = 0; i < Dices.Count; i++)
+                {
+                    Dices[i].Randomize();
+                }
+                CalculateResults(Players.Find(x => x.Active));
+                RollCount++;
             }
-            
-            CalculateResults(Players.Find(x => x.Active));
         }
 
         private void CalculateResults(Player player)
         {
             foreach (Cell cell in player.Points)
             {
-                cell.Text = cell.Calculate(Dices).ToString();
+                if (!cell.Confirmed)
+                {
+                    cell.Text = cell.Calculate(Dices).ToString();
+                }
             }
         }
 
@@ -130,6 +224,5 @@ namespace kockapoker
         {
             Application.Exit();
         }
-
     }
 }

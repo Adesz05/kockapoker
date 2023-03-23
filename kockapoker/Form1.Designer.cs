@@ -31,13 +31,12 @@ namespace kockapoker
         {
             this.RollDiceBtn = new System.Windows.Forms.Button();
             this.TablePanel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // RollDiceBtn
             // 
             this.RollDiceBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.RollDiceBtn.Location = new System.Drawing.Point(201, 292);
+            this.RollDiceBtn.Location = new System.Drawing.Point(123, 320);
             this.RollDiceBtn.Name = "RollDiceBtn";
             this.RollDiceBtn.Size = new System.Drawing.Size(153, 64);
             this.RollDiceBtn.TabIndex = 0;
@@ -53,30 +52,19 @@ namespace kockapoker
             this.TablePanel.Size = new System.Drawing.Size(420, 340);
             this.TablePanel.TabIndex = 1;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(50, 213);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "label1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.ForestGreen;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.TablePanel);
             this.Controls.Add(this.RollDiceBtn);
             this.DoubleBuffered = true;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Yahtzee";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -84,7 +72,6 @@ namespace kockapoker
 
         private System.Windows.Forms.Button RollDiceBtn;
         private System.Windows.Forms.Panel TablePanel;
-        private System.Windows.Forms.Label label1;
     }
 }
 

@@ -28,69 +28,65 @@ namespace kockapoker
 
         private void Confirm()
         {
-            Confirmed = true;
-            ForeColor = Color.Black;
+            if (!Confirmed && Text != "")
+            {
+                Confirmed = true;
+                ForeColor = Color.Black;
+                Form1.NextPlayer();
+            }
         }
 
         public int Calculate(List<Dice> dices)
         {
-            if (Confirmed)
+            switch (Type)
             {
-                return Value;
-            }
-            else
-            {
-                switch (Type)
-                {
-                    case "1-es":
-                        return Numbers(dices, 1);
+                case "1-es":
+                    return Numbers(dices, 1);
                         
-                    case "2-es":
-                        return Numbers(dices, 2);
+                case "2-es":
+                    return Numbers(dices, 2);
                         
-                    case "3-as":
-                        return Numbers(dices, 3);
+                case "3-as":
+                    return Numbers(dices, 3);
                         
-                    case "4-es":
-                        return Numbers(dices, 4);
+                case "4-es":
+                    return Numbers(dices, 4);
                         
-                    case "5-ös":
-                        return Numbers(dices, 5);
+                case "5-ös":
+                    return Numbers(dices, 5);
                         
-                    case "6-os":
-                        return Numbers(dices, 6);
+                case "6-os":
+                    return Numbers(dices, 6);
                         
-                    case "1 pár":
-                        return OnePair(dices);
+                case "1 pár":
+                    return OnePair(dices);
                         
-                    case "2 pár":
-                        return TwoPair(dices);
+                case "2 pár":
+                    return TwoPair(dices);
                         
-                    case "Drill":
-                        return ThreeOrFourOfAKind(dices, 3);
+                case "Drill":
+                    return ThreeOrFourOfAKind(dices, 3);
                         
-                    case "Póker":
-                        return ThreeOrFourOfAKind(dices, 4);
+                case "Póker":
+                    return ThreeOrFourOfAKind(dices, 4);
                         
-                    case "Fullhouse":
-                        return Fullhouse(dices);
+                case "Fullhouse":
+                    return Fullhouse(dices);
                         
-                    case "Kis sor":
-                        return SmallRow(dices);
+                case "Kis sor":
+                    return SmallRow(dices);
 
-                    case "Nagy sor":
-                        return BigRow(dices);
+                case "Nagy sor":
+                    return BigRow(dices);
                         
-                    case "Yahtzee":
-                        return Yahtzee(dices);
+                case "Yahtzee":
+                    return Yahtzee(dices);
 
-                    case "Esély":
-                        return Chance(dices);
+                case "Esély":
+                    return Chance(dices);
                         
-                    default:
-                        return 0;
-                        
-                }
+                default:
+                    return 0;     
             }
         }
 
@@ -99,18 +95,17 @@ namespace kockapoker
             List<Dice> dicescopy = CopyDices(dices);
             for (int i = 0; i < dices.Count-2; i++)
             {
-                if (dices.Count(x => x.Value == dices[i].Value) >= 3)
+                if (dices.Count(x => x.Value == dices[i].Value) == 3)
                 {
                     dicescopy.RemoveAll(x => x.Value == dices[i].Value);
-                    DiceLog(dicescopy);//itt még vannak bajok
                     if (dicescopy[0].Value == dicescopy[1].Value)
                     {
                         return 25;
                     }
-                    return Yahtzee(dices) == 50 ? 25 : 0;
+                    return 0;
                 }
             }
-            return 0;
+            return Yahtzee(dices) == 50 ? 25 : 0;
         }
 
         private List<Dice> CopyDices(List<Dice> dices)
