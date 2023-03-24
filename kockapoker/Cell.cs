@@ -16,6 +16,7 @@ namespace kockapoker
 
         public Cell(string type)
         {
+            Value = 0;
             Type = type;
             AutoSize = false;
             Confirmed = false;
@@ -30,6 +31,7 @@ namespace kockapoker
         {
             if (!Confirmed && Text != "")
             {
+                Value = Convert.ToInt32(Text);
                 Confirmed = true;
                 ForeColor = Color.Black;
                 Form1.NextPlayer();

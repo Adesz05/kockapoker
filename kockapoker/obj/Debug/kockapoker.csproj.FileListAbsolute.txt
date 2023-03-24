@@ -20,3 +20,14 @@ D:\BG\KockaPoker\kockapoker\obj\Debug\kockapoker.exe
 D:\BG\KockaPoker\kockapoker\obj\Debug\kockapoker.pdb
 D:\kockapokergit\kockapoker\obj\Debug\kockapoker.Menu.resources
 D:\BG\KockaPoker\kockapoker\obj\Debug\kockapoker.Menu.resources
+D:\BG\kockapoker\bin\Debug\kockapoker.exe.config
+D:\BG\kockapoker\bin\Debug\kockapoker.exe
+D:\BG\kockapoker\bin\Debug\kockapoker.pdb
+D:\BG\kockapoker\obj\Debug\kockapoker.csprojAssemblyReference.cache
+D:\BG\kockapoker\obj\Debug\kockapoker.Form1.resources
+D:\BG\kockapoker\obj\Debug\kockapoker.Menu.resources
+D:\BG\kockapoker\obj\Debug\kockapoker.Properties.Resources.resources
+D:\BG\kockapoker\obj\Debug\kockapoker.csproj.GenerateResource.cache
+D:\BG\kockapoker\obj\Debug\kockapoker.csproj.CoreCompileInputs.cache
+D:\BG\kockapoker\obj\Debug\kockapoker.exe
+D:\BG\kockapoker\obj\Debug\kockapoker.pdb

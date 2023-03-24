@@ -60,16 +60,16 @@ namespace kockapoker
         private static string FinalMessage()
         {
             string text = "A győztes";
-            List<Player> winner_s = Players.FindAll(z => z.Points.Sum(n => n.Value) == Players.Max(x => x.Points.Sum(y => y.Value))).ToList();
+            List<Player> winner_s = Players.FindAll(m => m.Points.Sum(n => n.Value) == Players.Max(x => x.Points.Sum(y => y.Value)));
             if (winner_s.Count == 1)
             {
-                text += $" {winner_s[0].Name}\nSzeretnétek új játékot kezdeni?";
+                text += $" {winner_s[0].Name} {winner_s.Last().Points.Sum(x => x.Value)} pont\nSzeretnétek új játékot kezdeni?";
             }
             else
             {
                 foreach (Player player in winner_s)
                 {
-                    text += $"\n{player.Name}";
+                    text += $"\n{player.Name} {winner_s.Last().Points.Sum(x => x.Value)} pont";
                 }
                 text += "\nSzeretnétek új játékot kezdeni?";
             }
@@ -178,7 +178,7 @@ namespace kockapoker
             {
                 Dices.Add(new Dice()
                 {
-                    Location = new Point(50+50*i, 50),
+                    Location = new Point(50+60*i, 150),
                     Size=new Size(50,50),
                     SizeMode=PictureBoxSizeMode.Zoom,
                     BackgroundImageLayout = ImageLayout.Zoom
