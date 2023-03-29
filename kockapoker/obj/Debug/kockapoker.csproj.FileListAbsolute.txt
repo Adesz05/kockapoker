@@ -31,3 +31,14 @@ D:\BG\kockapoker\obj\Debug\kockapoker.csproj.GenerateResource.cache
 D:\BG\kockapoker\obj\Debug\kockapoker.csproj.CoreCompileInputs.cache
 D:\BG\kockapoker\obj\Debug\kockapoker.exe
 D:\BG\kockapoker\obj\Debug\kockapoker.pdb
+D:\kockapoker\kockapoker\bin\Debug\kockapoker.exe.config
+D:\kockapoker\kockapoker\bin\Debug\kockapoker.exe
+D:\kockapoker\kockapoker\bin\Debug\kockapoker.pdb
+D:\kockapoker\kockapoker\obj\Debug\kockapoker.csprojAssemblyReference.cache
+D:\kockapoker\kockapoker\obj\Debug\kockapoker.Form1.resources
+D:\kockapoker\kockapoker\obj\Debug\kockapoker.Menu.resources
+D:\kockapoker\kockapoker\obj\Debug\kockapoker.Properties.Resources.resources
+D:\kockapoker\kockapoker\obj\Debug\kockapoker.csproj.GenerateResource.cache
+D:\kockapoker\kockapoker\obj\Debug\kockapoker.csproj.CoreCompileInputs.cache
+D:\kockapoker\kockapoker\obj\Debug\kockapoker.exe
+D:\kockapoker\kockapoker\obj\Debug\kockapoker.pdb

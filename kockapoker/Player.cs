@@ -10,8 +10,11 @@ namespace kockapoker
 {
     class Player
     {
+        //player name
         public string Name="";
+        //player points
         public List<Cell> Points = new List<Cell>();
+        //player active variable
         public bool Active
         {
             get { return active; }
@@ -23,6 +26,7 @@ namespace kockapoker
         }
         private bool active;
 
+        //If the player is active the players cells back color change
         private void ActiveChange(bool value)
         {
             for (int i = 0; i < Points.Count; i++)
@@ -31,6 +35,7 @@ namespace kockapoker
             }
         }
 
+        //Constructor
         public Player(string name)
         {
             Name = name;
