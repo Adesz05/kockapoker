@@ -106,7 +106,7 @@ namespace kockapoker
                 }
             }
         }
-
+        //Generating random player names
         private void PlayerGen(int playercount, List<string> funnynames)
         {
             Random r = new Random();
@@ -120,6 +120,7 @@ namespace kockapoker
             Players[0].Active = true;
         }
 
+        //Generating the player name labels
         private void LabelGen(Player player, int i, int playercount)
         {
             TablePanel.Controls.Add(new Label()
@@ -131,9 +132,10 @@ namespace kockapoker
                 BorderStyle = BorderStyle.FixedSingle
             });
         }
-
+        //Generating the labels, where we can see the options
         private void RowGen()
         {
+            // These are all the options 
             List<string> values = new List<string>() {"1", "2", "3", "4", "5", "6", "1 pár", "2 pár", "drill", "póker", "fullhouse", "kis sor", "nagy sor", "yahtzee", "esély" };
             for (int i = 0; i < values.Count; i++)
             {
@@ -147,7 +149,7 @@ namespace kockapoker
                 ColumnGen(row, i);
             }
         }
-
+        //Generating  both players points.
         private void ColumnGen(Panel row, int j)
         {
             LabelColumnGen(row, j);
@@ -159,6 +161,7 @@ namespace kockapoker
             }
         }
 
+        //Generating the labels, where we can choose between the points we want.
         private void LabelColumnGen(Panel row, int j)
         {
             row.Controls.Add(new Label()
@@ -172,6 +175,7 @@ namespace kockapoker
             });
         }
 
+        //Generating the dices and giving them position, size, and numbers.
         private void DiceGen()
         {
             for (int i = 0; i < 5; i++)
@@ -190,18 +194,22 @@ namespace kockapoker
             
         }
 
+        //After clicking the dices, we can  lock them, so when we  roll, the locked numbers stays the same.
         private void Dice_Click(object sender, EventArgs e)
         {
             Dice clicked = sender as Dice;
             clicked.Locked = !clicked.Locked;
         }
 
+        //After clicking the Roll Dice button, we got 5 new  numbers on the dices.
         private void RollDiceBtn_Click(object sender, EventArgs e)
         {
+            //If we roll less than 3 times we can roll again
             if (RollCount != 3)
             {
                 for (int i = 0; i < Dices.Count; i++)
                 {
+                    //Randomizing the dices numbers
                     Dices[i].Randomize();
                 }
                 CalculateResults(Players.Find(x => x.Active));
@@ -209,6 +217,7 @@ namespace kockapoker
             }
         }
 
+        //Calculating the results of the players.
         private void CalculateResults(Player player)
         {
             foreach (Cell cell in player.Points)
@@ -219,7 +228,7 @@ namespace kockapoker
                 }
             }
         }
-
+        //Closing the form.
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
